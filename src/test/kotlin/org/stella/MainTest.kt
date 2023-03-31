@@ -17,7 +17,9 @@ internal class MainTest {
         "$wellTypedDir/squares.stella",
         "$wellTypedDir/higher-order-1.stella",
         "$wellTypedDir/increment_twice.stella",
-        "$wellTypedDir/logical-operators.stella"
+        "$wellTypedDir/logical-operators.stella",
+        "$wellTypedDir/biconditional.stella",
+        "$wellTypedDir/power-of-two.stella",
     ])
     @Throws(
         IOException::class,
@@ -48,7 +50,9 @@ internal class MainTest {
         "$illTypedDir/undefined-variable-1.stella",
         "$illTypedDir/undefined-variable-2.stella",
         "$illTypedDir/bad-squares-1.stella",
-        "$illTypedDir/bad-squares-2.stella"
+        "$illTypedDir/bad-squares-2.stella",
+        "$illTypedDir/missing-main-method.stella",
+        "$illTypedDir/undefined-function.stella",
     ])
     @Throws(
         IOException::class,

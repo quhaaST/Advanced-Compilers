@@ -1,0 +1,15 @@
+language core;
+
+// some function to multiply the number by 10
+fn addTen(n : Nat) -> Nat {
+  return Nat::rec(10, n, fn(i : Nat) {
+    return fn(m : Nat) {
+      return succ(m);
+    };
+  });
+}
+
+// called non-main function
+fn not::main(n : Nat) -> Nat {
+  return addTen(0);
+}

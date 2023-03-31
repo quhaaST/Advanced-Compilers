@@ -1,0 +1,22 @@
+language core;
+
+// on first value true value in biconditional
+fn Bool::onTrue(b : Bool) -> Bool {
+  return if b then true else false;
+}
+
+// on first value false value in biconditional
+fn Bool::onFalse(b : Bool) -> Bool {
+  return if b then false else true;
+}
+
+// logical operator equivalence
+fn Bool::biconditional(a : Bool) -> (fn(Bool) -> Bool) {
+  return fn(b : Bool) {
+    return if a then Bool::onTrue(b) else Bool::onFalse(b);
+  };
+}
+
+fn main(n : Bool) -> Bool {
+  return Bool::biconditional(n)(n);
+}

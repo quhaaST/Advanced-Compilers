@@ -1,0 +1,23 @@
+language core;
+
+// double the value of the given parameter
+fn Nat::double(n : Nat) -> Nat {
+  return Nat::rec(n, n, fn(i : Nat) {
+    return fn(m : Nat) {
+      return succ(m);
+    };
+  });
+}
+
+// get the power of 2 at degree n
+fn Nat::pow(n : Nat) -> Nat {
+  return Nat::rec(n, 1, fn(i : Nat) {
+    return fn(m : Nat) {
+      return Nat::double(m);
+    };
+  });
+}
+
+fn main(n : Nat) -> Nat {
+  return Nat::pow(n);
+}
