@@ -13,6 +13,10 @@ For the following moment, it is possible to typecheck:
 - function application: Application
 - natural number expressions: ConstInt(0), Succ, NatRec
 - variables: Var
+- Unit type (nodes TypeUnit, ConstUnit)
+- Tuples of any size (nodes TypeTuple, Tuple, DotTuple)
+- Sum types (nodes TypeSum, Inl, Inr, Match, MatchCase, PatternInl, PatternInr, PatternVar)
+
 
 The main logic for TypeChecker is contained in `ProgramTypeChecker` class.
 
