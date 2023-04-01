@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-function.stella" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/well-typed/biconditional.stella" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/TypeCheck.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/TypeCheck.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" afterDir="false" />
-    </list>
+    <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,6 +149,7 @@
       <workItem from="1680196996228" duration="4949000" />
       <workItem from="1680205774442" duration="3843000" />
       <workItem from="1680271710441" duration="19845000" />
+      <workItem from="1680367819637" duration="13000" />
     </task>
     <servers />
   </component>
