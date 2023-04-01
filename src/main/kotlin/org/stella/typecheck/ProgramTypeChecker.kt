@@ -2,9 +2,8 @@ package org.stella.typecheck
 
 import com.sun.jdi.InvalidTypeException
 import org.syntax.stella.Absyn.*
-import java.lang.Exception
+import kotlin.Exception
 import kotlin.jvm.Throws
-import kotlin.math.exp
 
 /**
  * Base class for type checking logic process.
@@ -74,6 +73,7 @@ class ProgramTypeChecker {
      * @return return type of the expression
      *
      * @throws Exception if an inconsistency was met
+     * @throws ArrayIndexOutOfBoundsException if trying to access parameter at invalid position
      */
     private fun parseExpr(expr: Expr, context: FunctionContext): Types {
 
@@ -90,6 +90,7 @@ class ProgramTypeChecker {
                 // create new function, as Abstraction is
                 Types.Fun(paramType, parseExpr(expr.expr_, newContext))
             }
+
             is Application -> {
                 val funcType = parseExpr(expr.expr_, context)
                 val paramType = parseExpr(expr.listexpr_.first, context)
@@ -119,15 +120,23 @@ class ProgramTypeChecker {
 
                 funcAsTypeFun!!.outputType
             }
+
             is ConstFalse -> {
                 Types.Bool
             }
+
             is ConstTrue -> {
                 Types.Bool
             }
+
             is ConstInt -> {
                 Types.Nat
             }
+
+            is ConstUnit -> {
+                Types.Unit
+            }
+
             is If -> {
                 val ifExprType = parseExpr(expr.expr_1, context)
                 val onSuccessExprType = parseExpr(expr.expr_2, context)
@@ -262,6 +271,7 @@ class ProgramTypeChecker {
 
                 variableType
             }
+
             is Tuple -> {
                 val paramsList = mutableListOf<Types>()
 
@@ -271,6 +281,7 @@ class ProgramTypeChecker {
 
                 Types.Tuple(paramsList)
             }
+
             is DotTuple -> {
                 val tuple = parseExpr(expr.expr_, context)
                 val position = expr.integer_
@@ -278,8 +289,10 @@ class ProgramTypeChecker {
                 val tupleAsTypeTuple = tuple as? Types.Tuple
                 if (tupleAsTypeTuple != null) {
                     if ((position - 1) !in tupleAsTypeTuple.data.indices) {
-                        throw Exception("Error at line ${expr.line_num}:\n" +
-                                "Tuple has nothing at position $position!")
+                        throw ArrayIndexOutOfBoundsException(
+                            "Error at line ${expr.line_num}:\n" +
+                                    "Tuple has nothing at position $position!"
+                        )
                     }
                 } else {
                     throwTypeError(
@@ -292,6 +305,21 @@ class ProgramTypeChecker {
 
                 tupleAsTypeTuple!!.data[position - 1]
             }
+
+            is Match -> {
+                val variableType = parseExpr(expr.expr_, context)
+
+                parseMatchCase(expr.listmatchcase_, variableType, context)
+            }
+
+            is Inl -> {
+                Types.Sum(parseExpr(expr.expr_, context), Types.Undefined)
+            }
+
+            is Inr -> {
+                Types.Sum(Types.Undefined, parseExpr(expr.expr_, context))
+            }
+
             else -> {
                 throw Exception("Unsupported expression type!")
             }
@@ -329,9 +357,11 @@ class ProgramTypeChecker {
             is SomeReturnType -> {
                 parseType(returnType.type_)
             }
+
             is NoReturnType -> {
                 Types.Unit
             }
+
             else -> {
                 throw InvalidTypeException("Invalid type of return value!")
             }
@@ -346,13 +376,14 @@ class ProgramTypeChecker {
      * @return the formatted type as [Types]
      */
     private fun parseType(type: Type): Types {
-        return when(type) {
+        return when (type) {
             is TypeFun -> {
                 val paramType = parseType(type.listtype_.first)
                 val returnType = parseType(type.type_)
 
                 Types.Fun(paramType, returnType)
             }
+
             is TypeTuple -> {
                 val params = mutableListOf<Types>()
 
@@ -362,9 +393,118 @@ class ProgramTypeChecker {
 
                 Types.Tuple(params)
             }
+
+            is TypeSum -> {
+                val firstParam = parseType(type.type_1)
+                val secondParam = parseType(type.type_2)
+
+                return Types.Sum(firstParam, secondParam)
+            }
+
             else -> {
                 Types.getBaseType(type)
             }
+        }
+    }
+
+    /**
+     * Parse given Match expression data.
+     *
+     * @param listMatchCase the possible cases of Match expression
+     * @param varType type of the variable Match is applied on
+     * @param context current context of execution
+     *
+     * @return type of the match cases output, making sure all branches return the same type
+     *
+     * @throws InvalidTypeException in cases:
+     *  1. type of variable, which match is applied on, is not of type Sum
+     *  2. different branches return different types of output
+     *  3. invalid MatchCase field
+     *  4. MatchCase is applied on Pattern apart from PatternInl or PatternInr
+     */
+    private fun parseMatchCase(listMatchCase: ListMatchCase, varType: Types, context: FunctionContext): Types {
+        var returnType: Types = Types.Undefined
+
+        if (varType !is Types.Sum) {
+            throw InvalidTypeException("Match expression is applied on variable of type $varType when Sum is expected!")
+        }
+
+        for (matchCase in listMatchCase) {
+            if (matchCase is AMatchCase) {
+
+                when (val pattern = matchCase.pattern_) {
+
+                    // check the first parameter of Sum
+                    // run through the expressions under it, checking correctness of types
+                    is PatternInl -> {
+                        val variableName = getPatternVariableName(pattern.pattern_)
+
+                        // append the context with the variable, introduced by the pattern
+                        val newContext = context.also {
+                            it.currentFuncParams[variableName] = varType.first
+                        }
+
+                        val actualReturnType = parseExpr(matchCase.expr_, newContext)
+
+                        // check if the return type of the branch is the same for all branches
+                        if (returnType == Types.Undefined || returnType == actualReturnType) {
+                            returnType = actualReturnType
+                        } else {
+                            throwTypeError(
+                                lineNumber = pattern.line_num,
+                                expectedType = returnType,
+                                actualType = actualReturnType,
+                                expr = "Branch of Match expression",
+                            )
+                        }
+                    }
+
+                    // mostly the same logic, but assuming we are dealing with the second parameter of Sum
+                    is PatternInr -> {
+                        val variableName = getPatternVariableName(pattern.pattern_)
+
+                        val newContext = context.also {
+                            it.currentFuncParams[variableName] = varType.second
+                        }
+
+                        val actualReturnType = parseExpr(matchCase.expr_, newContext)
+
+                        if (returnType == Types.Undefined || returnType == actualReturnType) {
+                            returnType = actualReturnType
+                        } else {
+                            throwTypeError(
+                                lineNumber = pattern.line_num,
+                                expectedType = returnType,
+                                actualType = actualReturnType,
+                                expr = "Branch of Match expression",
+                            )
+                        }
+                    }
+
+                    else -> {
+                        throw Exception("Match case pattern must be either PatternInl or PatternInr!")
+                    }
+                }
+            } else {
+                throw Exception("Invalid type of Match branch!")
+            }
+        }
+
+        return returnType
+    }
+
+    /**
+     * Get the variable name from the pattern.
+     *
+     * @param pattern PatternInl or PatternInr to get variable name from
+     *
+     * @throws InvalidTypeException if given pattern is not of type PatternVar
+     */
+    private fun getPatternVariableName(pattern: Pattern): String {
+        return if (pattern is PatternVar) {
+            pattern.stellaident_
+        } else {
+            throw InvalidTypeException("Given pattern in not PatternVar!")
         }
     }
 

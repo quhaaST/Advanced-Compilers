@@ -5,33 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/syntax/stella/Absyn/Types.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/syntax/stella/Absyn/Types.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/ProgramTypeChecker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/ProgramTypeChecker.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-3.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-3.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-if-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-if-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-squares-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-squares-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-3.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/shadowed-variable-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-variable-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-variable-2.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/factorial.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/higher-order-1.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/increment_twice.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/logical-operators.stella" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/squares.stella" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +44,7 @@
       <list>
         <option value="Kotlin Class" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Sealed Class" />
       </list>
     </option>
   </component>
@@ -130,7 +107,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.testIllTypedPairs" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.testIllTypedSumTypes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +120,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.stella.MainTest.testIllTypedPairs&quot;" />
+            <option value="&quot;org.stella.MainTest.testIllTypedSumTypes&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -199,7 +176,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.testWellTypedTuples" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.testWellTypedSumTypes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -212,7 +189,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.stella.MainTest.testWellTypedTuples&quot;" />
+            <option value="&quot;org.stella.MainTest.testWellTypedSumTypes&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -225,10 +202,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.MainTest" />
+        <item itemvalue="Gradle.MainTest.testIllTypedSumTypes" />
+        <item itemvalue="Gradle.MainTest.testWellTypedSumTypes" />
         <item itemvalue="Gradle.MainTest.testWellTypedPairs" />
         <item itemvalue="Gradle.MainTest.testIllTypedTuples" />
-        <item itemvalue="Gradle.MainTest.testWellTypedTuples" />
-        <item itemvalue="Gradle.MainTest.testIllTypedPairs" />
       </list>
     </recent_temporary>
   </component>
@@ -260,6 +237,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/syntax/stella/ComposVisitor.java</url>
           <line>63</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/ProgramTypeChecker.kt</url>
+          <line>90</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
