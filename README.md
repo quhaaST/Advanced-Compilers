@@ -1,4 +1,4 @@
-# stella-implementation-in-kotlin
+# stella-with-simple-extensions
 ### Implemented by Evdokimov Aleksandr, B20-SD1
 
 
