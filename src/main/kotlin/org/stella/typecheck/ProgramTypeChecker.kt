@@ -4,6 +4,7 @@ import com.sun.jdi.InvalidTypeException
 import org.syntax.stella.Absyn.*
 import java.lang.Exception
 import kotlin.jvm.Throws
+import kotlin.math.exp
 
 /**
  * Base class for type checking logic process.
@@ -261,7 +262,36 @@ class ProgramTypeChecker {
 
                 variableType
             }
+            is Tuple -> {
+                val paramsList = mutableListOf<Types>()
 
+                for (param in expr.listexpr_) {
+                    paramsList.add(parseExpr(param, context))
+                }
+
+                Types.Tuple(paramsList)
+            }
+            is DotTuple -> {
+                val tuple = parseExpr(expr.expr_, context)
+                val position = expr.integer_
+
+                val tupleAsTypeTuple = tuple as? Types.Tuple
+                if (tupleAsTypeTuple != null) {
+                    if ((position - 1) !in tupleAsTypeTuple.data.indices) {
+                        throw Exception("Error at line ${expr.line_num}:\n" +
+                                "Tuple has nothing at position $position!")
+                    }
+                } else {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Tuple(listOf()),
+                        actualType = tuple,
+                        expr = "Dot tuple",
+                    )
+                }
+
+                tupleAsTypeTuple!!.data[position - 1]
+            }
             else -> {
                 throw Exception("Unsupported expression type!")
             }
@@ -316,13 +346,25 @@ class ProgramTypeChecker {
      * @return the formatted type as [Types]
      */
     private fun parseType(type: Type): Types {
-        return if (type is TypeFun) {
-            val paramType = parseType(type.listtype_.first)
-            val returnType = parseType(type.type_)
+        return when(type) {
+            is TypeFun -> {
+                val paramType = parseType(type.listtype_.first)
+                val returnType = parseType(type.type_)
 
-            Types.Fun(paramType, returnType)
-        } else {
-            Types.getBaseType(type)
+                Types.Fun(paramType, returnType)
+            }
+            is TypeTuple -> {
+                val params = mutableListOf<Types>()
+
+                for (param in type.listtype_) {
+                    params.add(parseType(param))
+                }
+
+                Types.Tuple(params)
+            }
+            else -> {
+                Types.getBaseType(type)
+            }
         }
     }
 

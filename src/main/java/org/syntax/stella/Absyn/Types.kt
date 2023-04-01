@@ -1,5 +1,7 @@
 package org.syntax.stella.Absyn
 
+import kotlin.collections.List
+
 sealed class Types {
     object Bool : Types()
 
@@ -8,6 +10,10 @@ sealed class Types {
     object Var: Types()
 
     object Unit: Types()
+
+    data class Tuple(
+        val data: List<Types>,
+    ) : Types()
 
     data class Fun(
         val inputType: Types,
@@ -34,6 +40,7 @@ sealed class Types {
             is Nat -> "Nat"
             is Var -> "Var"
             is Unit -> "Unit"
+            is Tuple -> "Tuple {${data.joinToString()}}"
             is Fun -> "Fun $inputType -> $outputType"
             is Undefined -> "Undefined"
         }

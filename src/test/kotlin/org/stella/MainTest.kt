@@ -79,15 +79,15 @@ internal class MainTest {
         System.setIn(original)
     }
 
-    @ParameterizedTest(name = "{index} Typechecking well-typed lists program {0}")
+    @ParameterizedTest(name = "{index} Typechecking well-typed pairs program {0}")
     @ValueSource(strings = [
-        "$listsBaseDir/well-typed/lists-1.stella",
+        "$pairsBaseDir/well-typed/pairs-1.stella",
     ])
     @Throws(
         IOException::class,
         Exception::class
     )
-    fun testWellTypedLists(filepath: String) {
+    fun testWellTypedPairs(filepath: String) {
         val original = System.`in`
         val fips = FileInputStream(File(filepath))
         System.setIn(fips)
@@ -95,15 +95,96 @@ internal class MainTest {
         System.setIn(original)
     }
 
-    @ParameterizedTest(name = "{index} Typechecking ill-typed lists program {0}")
+    @ParameterizedTest(name = "{index} Typechecking ill-typed pairs program {0}")
     @ValueSource(strings = [
-        "$listsBaseDir/ill-typed/bad-variants-1.stella",
+        "$pairsBaseDir/ill-typed/bad-pairs-1.stella",
     ])
     @Throws(
         IOException::class,
         Exception::class
     )
-    fun testIllTypedLists(filepath: String) {
+    fun testIllTypedPairs(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        var typecheckerFailed = false
+        try {
+            main()
+        } catch (e: java.lang.Exception) {
+            typecheckerFailed = true
+        }
+        if (!typecheckerFailed) {
+            throw java.lang.Exception("expected the typechecker to fail!")
+        }        // TODO: check that there is a type error actually, and not a problem with implementation
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking well-typed sum types program {0}")
+    @ValueSource(strings = [
+        "$sumTypesBaseDir/well-typed/sum-types-1.stella",
+        "$sumTypesBaseDir/well-typed/sum-types-2.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testWellTypedSumTypes(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        main()
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking ill-typed sum types program {0}")
+    @ValueSource(strings = [
+        "$sumTypesBaseDir/ill-typed/bad-sum-types-1.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testIllTypedSumTypes(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        var typecheckerFailed = false
+        try {
+            main()
+        } catch (e: java.lang.Exception) {
+            typecheckerFailed = true
+        }
+        if (!typecheckerFailed) {
+            throw java.lang.Exception("expected the typechecker to fail!")
+        }        // TODO: check that there is a type error actually, and not a problem with implementation
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking well-typed tuples program {0}")
+    @ValueSource(strings = [
+        "$tuplesBaseDir/well-typed/tuples-1.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testWellTypedTuples(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        main()
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking ill-typed tuples program {0}")
+    @ValueSource(strings = [
+        "$tuplesBaseDir/ill-typed/bad-tuples-1.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testIllTypedTuples(filepath: String) {
         val original = System.`in`
         val fips = FileInputStream(File(filepath))
         System.setIn(fips)
