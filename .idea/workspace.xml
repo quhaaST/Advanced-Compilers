@@ -4,7 +4,73 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="" />
+    <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/applying-non-function-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/applying-non-function-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/applying-non-function-3.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/applying-non-function-3.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/argument-type-mismatch-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/argument-type-mismatch-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/argument-type-mismatch-3.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/argument-type-mismatch-3.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-if-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-if-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-if-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-if-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-squares-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-squares-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-squares-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-squares-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-succ-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-succ-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/bad-succ-3.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-succ-3.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/missing-main-method.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/missing-main-method.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/shadowed-variable-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/shadowed-variable-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-function.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/undefined-function.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-variable-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/undefined-variable-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ill-typed/undefined-variable-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/undefined-variable-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/biconditional.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/biconditional.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/factorial.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/factorial.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/higher-order-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/higher-order-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/increment_twice.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/increment_twice.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/logical-operators.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/logical-operators.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/power-of-two.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/power-of-two.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/well-typed/squares.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/well-typed/squares.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/applying-non-function-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/applying-non-function-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/applying-non-function-3.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/argument-type-mismatch-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/argument-type-mismatch-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/argument-type-mismatch-3.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-if-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-if-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-if-3.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-if-3.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-if-4.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/core/ill-typed/bad-if-4.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-squares-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-squares-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-succ-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-succ-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/bad-succ-3.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/shadowed-variable-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/undefined-variable-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/ill-typed/undefined-variable-2.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/well-typed/factorial.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/well-typed/higher-order-1.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/well-typed/increment_twice.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/well-typed/logical-operators.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/core/well-typed/squares.stella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lists/ill-typed/bad-variants-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/lists/ill-typed/bad-variants-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lists/well-typed/lists-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/lists/well-typed/lists-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pairs/ill-typed/bad-pairs-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/pairs/ill-typed/bad-pairs-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pairs/well-typed/pairs-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/pairs/well-typed/pairs-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/records/ill-typed/bad-records-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/records/ill-typed/bad-records-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/records/well-typed/records-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/records/well-typed/records-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sum-types/ill-typed/bad-sum-types-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sum-types/ill-typed/bad-sum-types-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sum-types/well-typed/sum-types-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sum-types/well-typed/sum-types-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sum-types/well-typed/sum-types-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sum-types/well-typed/sum-types-2.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tuples/ill-typed/bad-tuples-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/tuples/ill-typed/bad-tuples-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tuples/well-typed/tuples-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/tuples/well-typed/tuples-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/variants/ill-typed/bad-variants-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/variants/ill-typed/bad-variants-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/variants/well-typed/variants-1.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/variants/well-typed/variants-1.stella" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/variants/well-typed/variants-2.stella" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/variants/well-typed/variants-2.stella" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +80,26 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stella-implementation-in-kotlin" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -34,22 +120,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/evdokimov-al/IdeaProjects/Advanced-Compilers&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/evdokimov-al/IdeaProjects/Advanced-Compilers/tests/core/well-typed",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Gradle.MainTest">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/core/well-typed" />
+      <recent name="$PROJECT_DIR$/tests/core/ill-typed" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.MainTest.testWellTypedLists">
     <configuration name="MainTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -119,6 +214,29 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="MainTest.testWellTypedLists" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.stella.MainTest.testWellTypedLists&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.stella.MainKt" />
       <module name="stella-implementation-in-kotlin.main" />
@@ -128,6 +246,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MainTest.testWellTypedLists" />
         <item itemvalue="Gradle.MainTest" />
         <item itemvalue="Gradle.MainTest.testWellTyped" />
         <item itemvalue="Gradle.MainTest.testIllTyped" />
