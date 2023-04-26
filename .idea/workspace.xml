@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ade5166d-5e66-444e-ac52-6b25b819c832" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/stella/MainTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,30 +82,7 @@
       <recent name="$PROJECT_DIR$/tests/core/well-typed" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MainTest.testIllTypedExceptions">
-    <configuration name="MainTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.stella.MainTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.MainTest.testWellTypedRecords">
     <configuration name="MainTest.testIllTypedExceptions" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,7 +106,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.testIllTypedReferences" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.testIllTypedRecords" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +119,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.stella.MainTest.testIllTypedReferences&quot;" />
+            <option value="&quot;org.stella.MainTest.testIllTypedRecords&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -153,7 +129,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.testIllTypedSumTypes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.testIllTypedSubtyping" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -166,7 +142,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.stella.MainTest.testIllTypedSumTypes&quot;" />
+            <option value="&quot;org.stella.MainTest.testIllTypedSubtyping&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -176,7 +152,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.testWellTypedSumTypes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.testWellTypedRecords" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -189,7 +165,30 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.stella.MainTest.testWellTypedSumTypes&quot;" />
+            <option value="&quot;org.stella.MainTest.testWellTypedRecords&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MainTest.testWellTypedSubtyping" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.stella.MainTest.testWellTypedSubtyping&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -201,11 +200,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MainTest.testWellTypedRecords" />
+        <item itemvalue="Gradle.MainTest.testIllTypedSubtyping" />
+        <item itemvalue="Gradle.MainTest.testWellTypedSubtyping" />
+        <item itemvalue="Gradle.MainTest.testIllTypedRecords" />
         <item itemvalue="Gradle.MainTest.testIllTypedExceptions" />
-        <item itemvalue="Gradle.MainTest.testIllTypedReferences" />
-        <item itemvalue="Gradle.MainTest" />
-        <item itemvalue="Gradle.MainTest.testIllTypedSumTypes" />
-        <item itemvalue="Gradle.MainTest.testWellTypedSumTypes" />
       </list>
     </recent_temporary>
   </component>
@@ -237,11 +236,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/syntax/stella/ComposVisitor.java</url>
           <line>63</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/org/stella/typecheck/ProgramTypeChecker.kt</url>
-          <line>90</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

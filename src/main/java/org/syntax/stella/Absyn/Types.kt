@@ -38,6 +38,10 @@ sealed class Types {
         val outputType: Types
     ) : Types()
 
+    data class Record(
+        val data: MutableMap<String, Types>
+    ) : Types()
+
     object Undefined : Types()
 
     companion object {
@@ -61,6 +65,7 @@ sealed class Types {
             is Tuple -> "Tuple {${data.joinToString()}}"
             is Sum -> "Sum of $first and $second"
             is Fun -> "Fun $inputType -> $outputType"
+            is Record -> "Record with field $data"
             is Undefined -> "Undefined"
         }
     }

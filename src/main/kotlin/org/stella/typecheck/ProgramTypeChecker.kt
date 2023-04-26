@@ -320,6 +320,44 @@ class ProgramTypeChecker {
                 Types.Sum(Types.Undefined, parseExpr(expr.expr_, context))
             }
 
+            is Record -> {
+                val recordParams = mutableMapOf<String, Types>()
+
+                for (binding in expr.listbinding_) {
+                    if (binding is ABinding) {
+                        val name = binding.stellaident_
+                        val type = parseExpr(binding.expr_, context)
+
+                        recordParams[name] = type
+                    } else {
+                        throw InvalidTypeException("Invalid type of Binding field!")
+                    }
+                }
+
+                Types.Record(recordParams)
+            }
+
+            is DotRecord -> {
+                val paramName = expr.stellaident_
+                val variable = parseExpr(expr.expr_, context)
+
+
+                if (variable is Types.Record) {
+                    if (!variable.data.contains(paramName)) {
+                        throw NoSuchFieldError("No field with name $paramName in $variable")
+                    }
+                } else {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Record(mutableMapOf()),
+                        actualType = variable,
+                        expr = "Dot record",
+                    )
+                }
+
+                (variable as Types.Record).data[paramName]!!
+            }
+
             else -> {
                 throw Exception("Unsupported expression type!")
             }
@@ -399,6 +437,23 @@ class ProgramTypeChecker {
                 val secondParam = parseType(type.type_2)
 
                 return Types.Sum(firstParam, secondParam)
+            }
+
+            is TypeRecord -> {
+                val params = mutableMapOf<String, Types>()
+
+                for (param in type.listrecordfieldtype_) {
+                    if (param is ARecordFieldType) {
+                        val name = param.stellaident_
+                        val type = parseType(param.type_)
+
+                        params[name] = type
+                    } else {
+                        throw InvalidTypeException("Invalid type of TypeRecord field!")
+                    }
+                }
+
+                Types.Record(params)
             }
 
             else -> {
