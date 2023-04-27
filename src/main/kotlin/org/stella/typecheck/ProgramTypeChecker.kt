@@ -45,7 +45,7 @@ class ProgramTypeChecker {
                     // get actual return type of the function
                     val actualReturnType = parseExpr(decl.expr_, startingContext)
 
-                    if (actualReturnType != returnType) {
+                    if (returnType != actualReturnType) {
                         throwTypeError(
                             lineNumber = decl.line_num,
                             expectedType = returnType,

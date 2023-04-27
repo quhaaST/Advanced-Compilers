@@ -40,7 +40,16 @@ sealed class Types {
 
     data class Record(
         val data: MutableMap<String, Types>
-    ) : Types()
+    ) : Types() {
+        override fun equals(other: Any?): Boolean {
+            return (other is Record) &&
+                    (data.all { (name, value) -> other.data[name] == value })
+        }
+
+        override fun hashCode(): Int {
+            return data.hashCode()
+        }
+    }
 
     object Undefined : Types()
 
