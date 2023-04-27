@@ -51,6 +51,8 @@ sealed class Types {
         }
     }
 
+    object Panic : Types()
+
     object Undefined : Types()
 
     companion object {
@@ -75,6 +77,7 @@ sealed class Types {
             is Sum -> "Sum of $first and $second"
             is Fun -> "Fun $inputType -> $outputType"
             is Record -> "Record with field $data"
+            is Panic -> "Panic!"
             is Undefined -> "Undefined"
         }
     }

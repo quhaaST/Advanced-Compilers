@@ -260,13 +260,17 @@ class ProgramTypeChecker {
             is Var -> {
                 var variableType: Types = Types.Undefined
 
-                // check if the given var is either a function or variable
-                variableType = if (context.currentFuncParams.contains(expr.stellaident_)) {
-                    context.currentFuncParams[expr.stellaident_]!!
-                } else if (context.funcNameToFuncType.contains(expr.stellaident_)) {
-                    context.funcNameToFuncType[expr.stellaident_]!!
+                if (expr.stellaident_ == "panic!") {
+                    variableType = Types.Panic
                 } else {
-                    throw Exception("${expr.stellaident_} is not defined!")
+                    // check if the given var is either a function or variable
+                    variableType = if (context.currentFuncParams.contains(expr.stellaident_)) {
+                        context.currentFuncParams[expr.stellaident_]!!
+                    } else if (context.funcNameToFuncType.contains(expr.stellaident_)) {
+                        context.funcNameToFuncType[expr.stellaident_]!!
+                    } else {
+                        throw Exception("${expr.stellaident_} is not defined!")
+                    }
                 }
 
                 variableType
@@ -573,6 +577,10 @@ class ProgramTypeChecker {
      */
     @Throws(InvalidTypeException::class)
     private fun throwTypeError(lineNumber: Int, expectedType: Types, actualType: Types, expr: String) {
+        if (actualType == Types.Panic) {
+            throw Exception("Panic!!!")
+        }
+
         throw InvalidTypeException(
             "Error at line $lineNumber: \n" +
                     "Expected type $expectedType but got $actualType\n" +
