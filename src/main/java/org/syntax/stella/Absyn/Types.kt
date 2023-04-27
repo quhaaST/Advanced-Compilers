@@ -53,6 +53,10 @@ sealed class Types {
 
     object Panic : Types()
 
+    data class Ref(
+        val content: Types,
+    ) : Types()
+
     object Undefined : Types()
 
     companion object {
@@ -78,6 +82,7 @@ sealed class Types {
             is Fun -> "Fun $inputType -> $outputType"
             is Record -> "Record with field $data"
             is Panic -> "Panic!"
+            is Ref -> "Reference of type $content"
             is Undefined -> "Undefined"
         }
     }

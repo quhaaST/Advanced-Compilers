@@ -4,6 +4,8 @@ import com.sun.jdi.InvalidTypeException
 import org.syntax.stella.Absyn.*
 import kotlin.Exception
 import kotlin.jvm.Throws
+import kotlin.math.exp
+import kotlin.sequences.Sequence
 
 /**
  * Base class for type checking logic process.
@@ -362,6 +364,57 @@ class ProgramTypeChecker {
                 (variable as Types.Record).data[paramName]!!
             }
 
+            is Assign -> {
+                val variable = parseExpr(expr.expr_1, context)
+                val resultExpr = parseExpr(expr.expr_2, context)
+
+                if (variable !is Types.Ref) {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Ref(Types.Undefined),
+                        actualType = variable,
+                        expr = "Assigning to non-reference",
+                    )
+                } else {
+                    if (variable.content::class != resultExpr::class) {
+                        throwTypeError(
+                            lineNumber = expr.line_num,
+                            expectedType = variable,
+                            actualType = resultExpr,
+                            expr = "Assigning to a different type of variable",
+                        )
+                    }
+                }
+
+                Types.Unit
+            }
+
+            is Deref -> {
+                val variable = parseExpr(expr.expr_, context)
+
+                if (variable !is Types.Ref) {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Ref(Types.Undefined),
+                        actualType = variable,
+                        expr = "Derefencing of non-reference",
+                    )
+                }
+
+                (variable as Types.Ref).content
+            }
+
+            is Ref -> {
+                val initialType = parseExpr(expr.expr_, context)
+
+                Types.Ref(initialType)
+            }
+
+            is org.syntax.stella.Absyn.Sequence -> {
+                parseExpr(expr.expr_1, context)
+                parseExpr(expr.expr_2, context)
+            }
+
             else -> {
                 throw Exception("Unsupported expression type!")
             }
@@ -458,6 +511,12 @@ class ProgramTypeChecker {
                 }
 
                 Types.Record(params)
+            }
+
+            is TypeRef -> {
+                val param = parseType(type.type_)
+
+                Types.Ref(param)
             }
 
             else -> {
