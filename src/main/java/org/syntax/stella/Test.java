@@ -2,12 +2,20 @@
 
 package org.syntax.stella;
 
-import org.syntax.stella.*;
-import java.io.*;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.*;
-import org.antlr.v4.runtime.dfa.*;
-import java.util.*;
+import org.antlr.v4.runtime.ANTLRErrorListener;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.atn.ATNConfigSet;
+import org.antlr.v4.runtime.dfa.DFA;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.BitSet;
 
 class TestError extends RuntimeException
 {

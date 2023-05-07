@@ -3,9 +3,9 @@
 package org.syntax.stella.Absyn;
 
 public abstract class PatternBinding implements java.io.Serializable {
-  public abstract <R,A> R accept(PatternBinding.Visitor<R,A> v, A arg);
+  public abstract <R,A> R accept(Visitor<R,A> v, A arg);
   public interface Visitor <R,A> {
-    public R visit(org.syntax.stella.Absyn.APatternBinding p, A arg);
+    public R visit(APatternBinding p, A arg);
 
   }
 
