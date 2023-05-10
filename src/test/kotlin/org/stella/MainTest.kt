@@ -15,6 +15,7 @@ const val sumTypesBaseDir = "$baseDir/sum-types"
 const val tuplesBaseDir = "$baseDir/tuples"
 const val exceptionsBaseDir = "$baseDir/exceptions"
 const val subtypingBaseDir = "$baseDir/subtyping"
+const val universalBaseDir = "$baseDir/universal-types"
 
 internal class MainTest {
     @ParameterizedTest(name = "{index} Typechecking well-typed core program {0}")
@@ -367,6 +368,56 @@ internal class MainTest {
         Exception::class
     )
     fun testIllTypedSubtyping(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        var typecheckerFailed = false
+        try {
+            main()
+        } catch (e: java.lang.Exception) {
+            typecheckerFailed = true
+        }
+        if (!typecheckerFailed) {
+            throw java.lang.Exception("expected the typechecker to fail!")
+        }        // TODO: check that there is a type error actually, and not a problem with implementation
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking well-typed universal types program {0}")
+    @ValueSource(strings = [
+        "$universalBaseDir/well-typed/universal-types-1.stella",
+        "$universalBaseDir/well-typed/universal-types-2.stella",
+        "$universalBaseDir/well-typed/universal-types-3.stella",
+        "$universalBaseDir/well-typed/universal-types-4.stella",
+        "$universalBaseDir/well-typed/universal-types-5.stella",
+        "$universalBaseDir/well-typed/universal-types-6.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testWellTypedUniversals(filepath: String) {
+        val original = System.`in`
+        val fips = FileInputStream(File(filepath))
+        System.setIn(fips)
+        main()
+        System.setIn(original)
+    }
+
+    @ParameterizedTest(name = "{index} Typechecking ill-typed universal types program {0}")
+    @ValueSource(strings = [
+        "$universalBaseDir/ill-typed/bad-universal-types-1.stella",
+        "$universalBaseDir/ill-typed/bad-universal-types-2.stella",
+        "$universalBaseDir/ill-typed/bad-universal-types-3.stella",
+        "$universalBaseDir/ill-typed/bad-universal-types-4.stella",
+        "$universalBaseDir/ill-typed/bad-universal-types-5.stella",
+        "$universalBaseDir/ill-typed/bad-universal-types-6.stella",
+    ])
+    @Throws(
+        IOException::class,
+        Exception::class
+    )
+    fun testIllTypedUniversals(filepath: String) {
         val original = System.`in`
         val fips = FileInputStream(File(filepath))
         System.setIn(fips)

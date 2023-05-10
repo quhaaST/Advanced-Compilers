@@ -4,8 +4,6 @@ import com.sun.jdi.InvalidTypeException
 import org.syntax.stella.Absyn.*
 import kotlin.Exception
 import kotlin.jvm.Throws
-import kotlin.math.exp
-import kotlin.sequences.Sequence
 
 /**
  * Base class for type checking logic process.
@@ -41,7 +39,35 @@ class ProgramTypeChecker {
                     val returnType = getReturnType(decl.returntype_)
 
                     // add the function to the current context, to mark them for further use
-                    startingContext.funcNameToFuncType[funcName] = Types.Fun(paramType, returnType)
+                    startingContext.funcNameToFuncType[funcName] = Types.Fun(mutableListOf(), paramType, returnType)
+                    startingContext.currentFuncParams[paramName] = paramType
+
+                    // get actual return type of the function
+                    val actualReturnType = parseExpr(decl.expr_, startingContext)
+
+                    if (returnType != actualReturnType) {
+                        throwTypeError(
+                            lineNumber = decl.line_num,
+                            expectedType = returnType,
+                            actualType = actualReturnType,
+                            expr = funcName,
+                        )
+                    }
+                } else if (decl is DeclFunGeneric) {
+                    // init function parameters value
+                    val (paramName, paramType) = getParamType(decl.listparamdecl_.first)
+
+                    // init function data
+                    val genericNames = mutableListOf<String>()
+                    for (genericVar in decl.liststellaident_) {
+                        genericNames.add(genericVar)
+                    }
+
+                    val funcName = decl.stellaident_
+                    val returnType = getReturnType(decl.returntype_)
+
+                    // add the function to the current context, to mark them for further use
+                    startingContext.funcNameToFuncType[funcName] = Types.Fun(genericNames, paramType, returnType)
                     startingContext.currentFuncParams[paramName] = paramType
 
                     // get actual return type of the function
@@ -90,7 +116,7 @@ class ProgramTypeChecker {
                 }
 
                 // create new function, as Abstraction is
-                Types.Fun(paramType, parseExpr(expr.expr_, newContext))
+                Types.Fun(mutableListOf(), paramType, parseExpr(expr.expr_, newContext))
             }
 
             is Application -> {
@@ -103,7 +129,7 @@ class ProgramTypeChecker {
                 if (funcAsTypeFun == null) {
                     throwTypeError(
                         lineNumber = expr.line_num,
-                        expectedType = Types.Fun(paramType, Types.Undefined),
+                        expectedType = Types.Fun(mutableListOf(), paramType, Types.Undefined),
                         actualType = Types.Undefined,
                         expr = "Application",
                     )
@@ -223,7 +249,7 @@ class ProgramTypeChecker {
                     } else {
                         throwTypeError(
                             lineNumber = expr.line_num,
-                            expectedType = Types.Fun(baseValueType, baseValueType),
+                            expectedType = Types.Fun(mutableListOf(), baseValueType, baseValueType),
                             actualType = subMapFuncType,
                             expr = "Sub function for mapper in Nat::rec",
                         )
@@ -233,7 +259,7 @@ class ProgramTypeChecker {
                         lineNumber = expr.line_num,
                         expectedType = Types.Fun(
                             inputType = countExprType,
-                            outputType = Types.Fun(baseValueType, baseValueType)
+                            outputType = Types.Fun(mutableListOf(), baseValueType, baseValueType)
                         ),
                         actualType = mapFuncType,
                         expr = "Map function for Nat::rec",
@@ -410,9 +436,57 @@ class ProgramTypeChecker {
                 Types.Ref(initialType)
             }
 
-            is org.syntax.stella.Absyn.Sequence -> {
+            is Sequence -> {
                 parseExpr(expr.expr_1, context)
                 parseExpr(expr.expr_2, context)
+            }
+
+            is TypeAbstraction -> {
+                val func = parseExpr(expr.expr_, context)
+                val paramName = expr.liststellaident_.first
+
+                if (func !is Types.Fun) {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Fun(mutableListOf(), Types.Undefined, Types.Undefined),
+                        actualType = func,
+                        expr = "Type abstraction"
+                    )
+                }
+
+                // create new function, as Abstraction is
+                (func as Types.Fun).copy(
+                    paramNames = func.paramNames.apply {
+                        add(paramName)
+                    }
+                )
+            }
+
+            is TypeApplication -> {
+                val types = mutableListOf<Types>()
+                for (type in expr.listtype_) {
+                    types.add(parseType(type))
+                }
+                val exprType = parseExpr(expr.expr_, context)
+
+                val typeAsGenericFun = exprType as? Types.Fun
+
+                if (typeAsGenericFun?.paramNames?.isNotEmpty() == false) {
+                    throwTypeError(
+                        lineNumber = expr.line_num,
+                        expectedType = Types.Fun(mutableListOf(), Types.Undefined, Types.Undefined),
+                        actualType = exprType,
+                        expr = "Type application"
+                    )
+                }
+
+                val newContext = context.also {
+                    typeAsGenericFun!!.paramNames.forEachIndexed { index, s ->
+                        context.genericContext[s] = types[index]
+                    }
+                }
+
+                getGenericSetupType(typeAsGenericFun!!, newContext)
             }
 
             else -> {
@@ -476,7 +550,7 @@ class ProgramTypeChecker {
                 val paramType = parseType(type.listtype_.first)
                 val returnType = parseType(type.type_)
 
-                Types.Fun(paramType, returnType)
+                Types.Fun(mutableListOf(), paramType, returnType)
             }
 
             is TypeTuple -> {
@@ -517,6 +591,24 @@ class ProgramTypeChecker {
                 val param = parseType(type.type_)
 
                 Types.Ref(param)
+            }
+
+            is TypeForAll -> {
+                val params = mutableListOf<String>()
+                for (paramName in type.liststellaident_) {
+                    params.add(paramName)
+                }
+                val func = parseType(type.type_) as? Types.Fun
+
+                if (func != null) {
+                    Types.Fun(params, func.inputType, func.outputType)
+                } else {
+                    throw InvalidTypeException("Invalid type of Func in Generic function field!")
+                }
+            }
+
+            is TypeVar -> {
+                Types.Var(type.stellaident_)
             }
 
             else -> {
@@ -647,6 +739,37 @@ class ProgramTypeChecker {
         )
     }
 
+    private fun getGenericSetupType(type: Types, context: FunctionContext): Types {
+        return when (type) {
+            is Types.Var -> {
+                val selectedType = context.genericContext.getOrDefault(type.paramName, type)
+
+                selectedType
+            }
+
+            is Types.Fun -> {
+                val inputType = getGenericSetupType(type.inputType, context)
+                val outputType = getGenericSetupType(type.outputType, context)
+
+                Types.Fun(type.paramNames, inputType, outputType)
+            }
+
+            is Types.Record -> {
+                val newData = type.data
+
+                for ((key, value) in newData) {
+                    newData[key] = getGenericSetupType(value, context)
+                }
+
+                Types.Record(newData)
+            }
+
+            else -> {
+                type
+            }
+        }
+    }
+
     /**
      * Context class for program.
      * It stores the description of the function by its name.
@@ -655,5 +778,6 @@ class ProgramTypeChecker {
     private class FunctionContext {
         val funcNameToFuncType = mutableMapOf<String, Types.Fun>()
         val currentFuncParams = mutableMapOf<String, Types>()
+        val genericContext = mutableMapOf<String, Types>()
     }
 }

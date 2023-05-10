@@ -7,7 +7,9 @@ sealed class Types {
 
     object Nat : Types()
 
-    object Var : Types()
+    data class Var(
+        val paramName: String,
+    ) : Types()
 
     object Unit : Types()
 
@@ -34,9 +36,24 @@ sealed class Types {
     }
 
     data class Fun(
+        val paramNames: MutableList<String> = mutableListOf(),
         val inputType: Types,
         val outputType: Types
-    ) : Types()
+    ) : Types() {
+        override fun equals(other: Any?): Boolean {
+            return (other is Fun) &&
+                    (this.inputType == other.inputType) &&
+                    (this.outputType == other.outputType)
+        }
+
+        override fun hashCode(): Int {
+            var result = paramNames.hashCode()
+            result = 31 * result + inputType.hashCode()
+            result = 31 * result + outputType.hashCode()
+            return result
+        }
+
+    }
 
     data class Record(
         val data: MutableMap<String, Types>
@@ -64,7 +81,6 @@ sealed class Types {
             return when (type) {
                 is TypeBool -> Bool
                 is TypeNat -> Nat
-                is TypeVar -> Var
                 is TypeUnit -> Unit
                 else -> Undefined
             }
@@ -73,17 +89,20 @@ sealed class Types {
 
     override fun toString(): String {
         return when (this) {
-            is Bool -> "Bool"
-            is Nat -> "Nat"
-            is Var -> "Var"
-            is Unit -> "Unit"
+            Bool -> "Bool"
+            Nat -> "Nat"
+            is Var -> "Var associated with $paramName"
+            Unit -> "Unit"
             is Tuple -> "Tuple {${data.joinToString()}}"
             is Sum -> "Sum of $first and $second"
-            is Fun -> "Fun $inputType -> $outputType"
+            is Fun -> "Fun $inputType -> $outputType, on param $paramNames"
             is Record -> "Record with field $data"
-            is Panic -> "Panic!"
+            Panic -> "Panic!"
             is Ref -> "Reference of type $content"
             is Undefined -> "Undefined"
         }
     }
 }
+
+//Fun(paramName=null, inputType=Fun(paramName=X, inputType=Var(paramName=X), outputType=Fun(paramName=Y, inputType=Var(paramName=Y), outputType=Var(paramName=X))), outputType=Var(paramName=Y))
+//Fun(paramName=null, inputType=Fun(paramName=X, inputType=Var(paramName=X), outputType=Fun(paramName=Y, inputType=Var(paramName=Y), outputType=Var(paramName=X))), outputType=Bool)
