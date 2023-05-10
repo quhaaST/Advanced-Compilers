@@ -21,6 +21,9 @@ For the following moment, it is possible to typecheck:
 - Errors (node Panic)
 - Records (nodes TypeRecord, ARecordFieldType, Record, DotRecord 
 - Subtyping for records (with permutations of fields) and functions
+- Type variables (node TypeVar)
+- Universal types (nodes TypeForAll, TypeAbstraction, TypeApplication)
+- Generic function declarations (DeclFunGeneric)
 
 
 The main logic for TypeChecker is contained in `ProgramTypeChecker` class.

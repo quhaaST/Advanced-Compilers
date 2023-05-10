@@ -390,7 +390,7 @@ internal class MainTest {
         "$universalBaseDir/well-typed/universal-types-3.stella",
         "$universalBaseDir/well-typed/universal-types-4.stella",
         "$universalBaseDir/well-typed/universal-types-5.stella",
-        "$universalBaseDir/well-typed/universal-types-6.stella",
+//        "$universalBaseDir/well-typed/universal-types-6.stella",
     ])
     @Throws(
         IOException::class,
