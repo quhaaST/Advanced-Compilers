@@ -2,8 +2,6 @@ package org.stella.typecheck
 
 import com.sun.jdi.InvalidTypeException
 import org.syntax.stella.Absyn.*
-import kotlin.Exception
-import kotlin.jvm.Throws
 
 /**
  * Base class for type checking logic process.
@@ -58,6 +56,7 @@ class ProgramTypeChecker {
                     val (paramName, paramType) = getParamType(decl.listparamdecl_.first)
 
                     // init function data
+                    // create a list of required generic parameters
                     val genericNames = mutableListOf<String>()
                     for (genericVar in decl.liststellaident_) {
                         genericNames.add(genericVar)
@@ -286,13 +285,11 @@ class ProgramTypeChecker {
             }
 
             is Var -> {
-                var variableType: Types = Types.Undefined
-
-                if (expr.stellaident_ == "panic!") {
-                    variableType = Types.Panic
+                val variableType = if (expr.stellaident_ == "panic!") {
+                    Types.Panic
                 } else {
                     // check if the given var is either a function or variable
-                    variableType = if (context.currentFuncParams.contains(expr.stellaident_)) {
+                    if (context.currentFuncParams.contains(expr.stellaident_)) {
                         context.currentFuncParams[expr.stellaident_]!!
                     } else if (context.funcNameToFuncType.contains(expr.stellaident_)) {
                         context.funcNameToFuncType[expr.stellaident_]!!
@@ -454,7 +451,8 @@ class ProgramTypeChecker {
                     )
                 }
 
-                // create new function, as Abstraction is
+                // create new generic function, as TypeAbstraction is
+                // the function requires type from paramNames to be evaluated
                 (func as Types.Fun).copy(
                     paramNames = func.paramNames.apply {
                         add(paramName)
@@ -463,14 +461,17 @@ class ProgramTypeChecker {
             }
 
             is TypeApplication -> {
+                // get list of applied types
                 val types = mutableListOf<Types>()
                 for (type in expr.listtype_) {
                     types.add(parseType(type))
                 }
-                val exprType = parseExpr(expr.expr_, context)
 
+                // cast inner expression type
+                val exprType = parseExpr(expr.expr_, context)
                 val typeAsGenericFun = exprType as? Types.Fun
 
+                // check if the function is generic
                 if (typeAsGenericFun?.paramNames?.isNotEmpty() == false) {
                     throwTypeError(
                         lineNumber = expr.line_num,
@@ -480,6 +481,7 @@ class ProgramTypeChecker {
                     )
                 }
 
+                // evaluate inner part with substituted types
                 val newContext = context.also {
                     typeAsGenericFun!!.paramNames.forEachIndexed { index, s ->
                         context.genericContext[s] = types[index]
@@ -598,6 +600,7 @@ class ProgramTypeChecker {
                 for (paramName in type.liststellaident_) {
                     params.add(paramName)
                 }
+
                 val func = parseType(type.type_) as? Types.Fun
 
                 if (func != null) {
@@ -739,6 +742,9 @@ class ProgramTypeChecker {
         )
     }
 
+    /**
+     * Substitute the declared generic types into the given expression
+     */
     private fun getGenericSetupType(type: Types, context: FunctionContext): Types {
         return when (type) {
             is Types.Var -> {
@@ -764,6 +770,29 @@ class ProgramTypeChecker {
                 Types.Record(newData)
             }
 
+            is Types.Sum -> {
+                val firstVar = getGenericSetupType(type.first, context)
+                val secondVar = getGenericSetupType(type.second, context)
+
+                Types.Sum(firstVar, secondVar)
+            }
+
+            is Types.Ref -> {
+                val content = getGenericSetupType(type.content, context)
+
+                Types.Ref(content)
+            }
+
+            is Types.Tuple -> {
+                val data = mutableListOf<Types>()
+
+                for (element in type.data) {
+                    data.add(getGenericSetupType(element, context))
+                }
+
+                Types.Tuple(data)
+            }
+
             else -> {
                 type
             }
@@ -774,6 +803,7 @@ class ProgramTypeChecker {
      * Context class for program.
      * It stores the description of the function by its name.
      * It stores the type of the variable by its name.
+     * It stores the introduced generic types by its name.
      */
     private class FunctionContext {
         val funcNameToFuncType = mutableMapOf<String, Types.Fun>()

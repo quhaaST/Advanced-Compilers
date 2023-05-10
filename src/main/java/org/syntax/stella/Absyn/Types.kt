@@ -95,7 +95,7 @@ sealed class Types {
             Unit -> "Unit"
             is Tuple -> "Tuple {${data.joinToString()}}"
             is Sum -> "Sum of $first and $second"
-            is Fun -> "Fun $inputType -> $outputType, on param $paramNames"
+            is Fun -> "Fun $inputType -> $outputType, on params $paramNames"
             is Record -> "Record with field $data"
             Panic -> "Panic!"
             is Ref -> "Reference of type $content"
@@ -103,6 +103,3 @@ sealed class Types {
         }
     }
 }
-
-//Fun(paramName=null, inputType=Fun(paramName=X, inputType=Var(paramName=X), outputType=Fun(paramName=Y, inputType=Var(paramName=Y), outputType=Var(paramName=X))), outputType=Var(paramName=Y))
-//Fun(paramName=null, inputType=Fun(paramName=X, inputType=Var(paramName=X), outputType=Fun(paramName=Y, inputType=Var(paramName=Y), outputType=Var(paramName=X))), outputType=Bool)
